@@ -5,8 +5,11 @@ import Link from "next/link";
 
 const SLIDES = [
   { emoji: "\uD83D\uDC04", title: "Smart Cow Management", subtitle: "Track every cow from birth to market with AI-powered insights" },
+  { emoji: "\uD83D\uDC10", title: "Goat Herd Tracking", subtitle: "Monitor goats, breeding cycles, and kid growth with precision" },
+  { emoji: "\uD83D\uDC14", title: "Poultry Farm Analytics", subtitle: "Egg production, feed costs, and flock health in one dashboard" },
+  { emoji: "\uD83E\uDD86", title: "Duck Farm Management", subtitle: "Track duck breeds, weight, and feeding with smart tools" },
   { emoji: "\uD83E\uDDBE", title: "Health Monitoring", subtitle: "Real-time vaccine alerts, weight tracking, and health records" },
-  { emoji: "\uD83D\uDCCA", title: "Profit Analytics", subtitle: "Per-cow ROI, milk production analysis, and cost tracking" },
+  { emoji: "\uD83D\uDCCA", title: "Profit Analytics", subtitle: "Per-animal ROI, production analysis, and cost tracking" },
 ];
 
 export default function Hero() {
@@ -21,7 +24,6 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-[60vh] overflow-hidden bg-gradient-to-br from-emerald-900 via-emerald-800 to-teal-900 pt-20">
-      <div className="absolute inset-0 bg-[url('/animals/cow.svg')] bg-repeat opacity-5" />
       <div className="relative mx-auto flex max-w-7xl flex-col items-center justify-center px-4 py-20 text-center sm:px-6 lg:py-28">
         <div className="mb-8 text-8xl transition-all duration-500">{current.emoji}</div>
         <h1 className="mb-6 max-w-3xl text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
@@ -35,7 +37,7 @@ export default function Hero() {
             Start Free Trial
           </Link>
           <Link href="/explore" className="rounded-xl border-2 border-emerald-400/50 px-8 py-3.5 text-base font-semibold text-white transition hover:bg-emerald-700/50">
-            Browse Cows
+            Browse Animals
           </Link>
         </div>
       </div>

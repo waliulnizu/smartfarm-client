@@ -1,12 +1,12 @@
 "use client";
 
 const FEATURES = [
-  { icon: "\uD83D\uDC04", title: "Individual Cow Tracking", desc: "Track each cow by neck-tag ID with breed, weight, health status, and pregnancy history." },
-  { icon: "\uD83E\uDDD1\u200D\u2696\uFE0F", title: "Daily Log System", desc: "Log feed intake, milk yield, weight, health notes, and medicine for every cow daily." },
-  { icon: "\uD83D\uDC89", title: "Vaccine Scheduler", desc: "Automated vaccine alerts with overdue, tomorrow, and upcoming notifications per cow." },
+  { icon: "\uD83D\uDC04", title: "Individual Animal Tracking", desc: "Track each animal by ID with breed, weight, health status, and pregnancy history." },
+  { icon: "\uD83E\uDDD1\u200D\u2696\uFE0F", title: "Daily Log System", desc: "Log feed intake, production yield, weight, health notes, and medicine for every animal daily." },
+  { icon: "\uD83D\uDC89", title: "Vaccine Scheduler", desc: "Automated vaccine alerts with overdue, tomorrow, and upcoming notifications per animal." },
   { icon: "\uD83D\uDCC8", title: "Weight Growth Analytics", desc: "Visualize weight gain over custom time ranges with net change and percentage tracking." },
-  { icon: "\uD83E\uDE99", title: "Calving & Pregnancy", desc: "Record calving events, auto-register calves, track pregnancy history and delivery dates." },
-  { icon: "\uD83D\uDCB0", title: "ROI & Valuation", desc: "Per-cow profit analysis with milk income, asset value, expense breakdown, and ROI percentage." },
+  { icon: "\uD83E\uDE99", title: "Calving & Pregnancy", desc: "Record calving events, auto-register offspring, track pregnancy history and delivery dates." },
+  { icon: "\uD83D\uDCB0", title: "ROI & Valuation", desc: "Per-animal profit analysis with income, asset value, expense breakdown, and ROI percentage." },
 ];
 
 export default function FeaturesSection() {
@@ -15,7 +15,7 @@ export default function FeaturesSection() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="mb-12 text-center">
           <h2 className="text-3xl font-bold text-zinc-900 sm:text-4xl">Everything You Need to Manage Your Farm</h2>
-          <p className="mt-3 text-lg text-zinc-500">AI-powered tools for modern cattle farming</p>
+          <p className="mt-3 text-lg text-zinc-500">AI-powered tools for modern livestock farming</p>
         </div>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {FEATURES.map((f) => (
