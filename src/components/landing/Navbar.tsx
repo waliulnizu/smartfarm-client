@@ -14,6 +14,7 @@ const NAV_LINKS_LOGGED_IN = [
   { href: "/", label: "Home" },
   { href: "/explore", label: "Explore" },
   { href: "/dashboard/cow", label: "Dashboard" },
+  { href: "/profile", label: "Profile" },
   { href: "/about", label: "About" },
 ];
 
@@ -77,6 +78,9 @@ export default function Navbar() {
           {user ? (
             <>
               <span className="block px-3 py-1 text-sm text-zinc-400">{user.name}</span>
+              <Link href="/profile" onClick={() => setMobileOpen(false)} className="block rounded-lg px-3 py-2 text-sm font-medium text-emerald-600 hover:bg-emerald-50">
+                Profile
+              </Link>
               <Link href="/dashboard/cow" onClick={() => setMobileOpen(false)} className="block rounded-lg px-3 py-2 text-sm font-medium text-emerald-600 hover:bg-emerald-50">
                 Dashboard
               </Link>

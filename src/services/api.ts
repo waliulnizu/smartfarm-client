@@ -301,10 +301,17 @@ export interface UserProfile {
   name: string;
   email: string;
   role: string;
+  avatar?: string;
+  createdAt?: string;
 }
 
 export async function getMe(): Promise<UserProfile> {
   const { data } = await api.get<UserProfile>("/auth/me");
+  return data;
+}
+
+export async function updateProfile(payload: { name?: string; email?: string; currentPassword?: string; newPassword?: string }): Promise<UserProfile> {
+  const { data } = await api.put<UserProfile>("/auth/profile", payload);
   return data;
 }
 
