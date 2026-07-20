@@ -10,15 +10,46 @@ interface Message {
 
 export default function AiChatAssistant() {
   const [isOpen, setIsOpen] = useState(false);
+<<<<<<< HEAD
   const [messages, setMessages] = useState<Message[]>([
     { role: "assistant", text: "Hello! I'm SmartKhamar AI. Ask me anything about cow farming, health, breeding, or farm management!" },
   ]);
+=======
+  const [isConnected, setIsConnected] = useState<boolean | null>(null);
+  const [messages, setMessages] = useState<Message[]>([]);
+>>>>>>> 8cfe7ef (Initial commit)
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => { bottomRef.current?.scrollIntoView({ behavior: "smooth" }); }, [messages]);
 
+<<<<<<< HEAD
+=======
+  useEffect(() => {
+    if (isOpen && messages.length === 0) {
+      checkConnection();
+    }
+  }, [isOpen]);
+
+  async function checkConnection() {
+    try {
+      const { data } = await api.post("/ai/chat", { message: "hi", history: [] });
+      if (data.reply) {
+        setIsConnected(true);
+        setMessages([
+          { role: "assistant", text: "Hello! I'm SmartKhamar AI, powered by Llama 3.3. Ask me anything about farming, health, breeding, or farm management!" },
+        ]);
+      }
+    } catch {
+      setIsConnected(false);
+      setMessages([
+        { role: "assistant", text: "AI service এখন offline আছে। পরে আবার চেষ্টা করুন।" },
+      ]);
+    }
+  }
+
+>>>>>>> 8cfe7ef (Initial commit)
   async function handleSend(e?: React.FormEvent) {
     e?.preventDefault();
     if (!input.trim() || isLoading) return;
@@ -31,7 +62,11 @@ export default function AiChatAssistant() {
       const { data } = await api.post("/ai/chat", { message: userMsg, history });
       setMessages((prev) => [...prev, { role: "assistant", text: data.reply }]);
     } catch {
+<<<<<<< HEAD
       setMessages((prev) => [...prev, { role: "assistant", text: "Sorry, I encountered an error. Please try again." }]);
+=======
+      setMessages((prev) => [...prev, { role: "assistant", text: "AI service এখন offline আছে। পরে আবার চেষ্টা করুন।" }]);
+>>>>>>> 8cfe7ef (Initial commit)
     } finally {
       setIsLoading(false);
     }
@@ -45,6 +80,12 @@ export default function AiChatAssistant() {
             <div className="flex items-center gap-2">
               <span className="text-lg">{"\uD83E\uDD16"}</span>
               <span className="font-semibold text-white">SmartKhamar AI</span>
+<<<<<<< HEAD
+=======
+              {isConnected !== null && (
+                <span className={`ml-1 h-2 w-2 rounded-full ${isConnected ? "bg-green-300" : "bg-red-300"}`} title={isConnected ? "Connected" : "Offline"} />
+              )}
+>>>>>>> 8cfe7ef (Initial commit)
             </div>
             <button onClick={() => setIsOpen(false)} className="text-white/80 hover:text-white">&times;</button>
           </div>
@@ -59,11 +100,15 @@ export default function AiChatAssistant() {
             {isLoading && (
               <div className="flex justify-start">
                 <div className="rounded-2xl bg-zinc-100 px-4 py-2.5 text-sm text-zinc-500">
+<<<<<<< HEAD
                   <span className="inline-flex gap-1">
                     <span className="h-2 w-2 animate-bounce rounded-full bg-zinc-400" style={{ animationDelay: "0ms" }} />
                     <span className="h-2 w-2 animate-bounce rounded-full bg-zinc-400" style={{ animationDelay: "150ms" }} />
                     <span className="h-2 w-2 animate-bounce rounded-full bg-zinc-400" style={{ animationDelay: "300ms" }} />
                   </span>
+=======
+                  Thinking...
+>>>>>>> 8cfe7ef (Initial commit)
                 </div>
               </div>
             )}
@@ -71,7 +116,11 @@ export default function AiChatAssistant() {
           </div>
           <form onSubmit={handleSend} className="flex items-center gap-2 border-t border-zinc-200 p-3">
             <input
+<<<<<<< HEAD
               type="text" value={input} onChange={(e) => setInput(e.target.value)} placeholder="Ask about cow farming..."
+=======
+              type="text" value={input} onChange={(e) => setInput(e.target.value)} placeholder="Ask about farming..."
+>>>>>>> 8cfe7ef (Initial commit)
               className="flex-1 rounded-xl border border-zinc-300 bg-zinc-50 px-3 py-2 text-sm text-zinc-900 placeholder-zinc-400 focus:border-emerald-500 focus:outline-none"
               disabled={isLoading}
             />

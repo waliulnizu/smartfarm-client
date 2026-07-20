@@ -1,6 +1,10 @@
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
+<<<<<<< HEAD
+=======
+import Link from "next/link";
+>>>>>>> 8cfe7ef (Initial commit)
 import { useEffect, useState } from "react";
 import { ANIMAL_THEMES, AnimalType, useAnimalType } from "@/context/AnimalTypeContext";
 import { getMe, UserProfile } from "@/services/api";
@@ -78,13 +82,22 @@ export default function Sidebar() {
   return (
     <aside className="flex h-full w-64 flex-col border-r border-zinc-200 bg-white">
       <div className="border-b border-zinc-200 px-5 py-5">
+<<<<<<< HEAD
         <div className="flex items-center gap-2">
           <span className="text-2xl">{"\uD83C\uDF3E"}</span>
+=======
+        <Link href="/" className="flex items-center gap-2">
+          <img src="/animals/cow.svg" alt="SmartKhamar" className="h-8 w-8" />
+>>>>>>> 8cfe7ef (Initial commit)
           <div>
             <h1 className="text-lg font-bold text-zinc-900">SmartKhamar</h1>
             <p className="text-[10px] text-zinc-400">Farm Management</p>
           </div>
+<<<<<<< HEAD
         </div>
+=======
+        </Link>
+>>>>>>> 8cfe7ef (Initial commit)
       </div>
 
       <nav className="flex-1 space-y-1 px-3 py-4">
