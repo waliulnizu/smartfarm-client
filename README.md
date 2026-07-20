@@ -1,36 +1,113 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SmartKhamar AI — Client
+
+AI-powered livestock & poultry farm management frontend built with Next.js 16, React 19, and Tailwind CSS 4.
+
+## Features
+
+- **Multi-Animal Support** — Cow, Goat, Hen, Duck with type-specific themes and forms
+- **Landing Page** — Hero, features, categories, testimonials, FAQ, newsletter sections
+- **Explore Page** — Browse all animals with type filters (Cow/Goat/Hen/Duck)
+- **Animal Detail Page** — Full animal info with type-specific emoji and colors
+- **Add Animal** — Type tabs with dynamic subType/gender fields per animal type
+- **Manage Animals** — Type filter tabs, table view with edit/delete
+- **Dashboard** — Per-animal-type dashboard with daily logs, weight tracking, vaccine alerts
+- **AI Chat Assistant** — Groq-powered chatbot (Llama 3.3 70B) with connection status
+- **AI Content Generator** — Auto-generate animal descriptions
+- **Asset & Valuation** — ROI calculator, per-animal profitability analysis
+- **User Management** — Admin can manage staff accounts
+- **Profile** — Edit name, email, change password
+- **Auth** — Email/password + Google OAuth login/register
+- **Responsive** — Mobile-first design with hamburger menu
+
+## Tech Stack
+
+| Technology | Version |
+|------------|---------|
+| Next.js | 16.2 |
+| React | 19.2 |
+| TypeScript | 5.x |
+| Tailwind CSS | 4.x |
+| Axios | 1.18 |
+| Recharts | 3.9 |
+| TanStack Query | 5.x |
+| Google OAuth | @react-oauth/google |
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18+
+- pnpm
+
+### Setup
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Install dependencies
+pnpm install
+
+# Create .env.local
+cp .env.example .env.local
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Environment Variables
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```env
+NEXT_PUBLIC_API_URL=http://localhost:5000/api
+NEXT_PUBLIC_GOOGLE_CLIENT_ID=your-google-client-id
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Development
 
-## Learn More
+```bash
+pnpm dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+Open [http://localhost:3000](http://localhost:3000)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Production Build
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+pnpm build
+pnpm start
+```
 
-## Deploy on Vercel
+## Project Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+client/
+├── src/
+│   ├── app/                    # Next.js App Router pages
+│   │   ├── page.tsx            # Landing page
+│   │   ├── login/              # Login page
+│   │   ├── register/           # Register page
+│   │   ├── explore/            # Explore animals
+│   │   ├── items/              # Add/Manage/Detail animals
+│   │   ├── profile/            # User profile
+│   │   ├── dashboard/          # Dashboard (cow/goat/hen/duck)
+│   │   └── about/              # About page
+│   ├── components/
+│   │   ├── landing/            # Navbar, Hero, Features, Footer, etc.
+│   │   ├── dashboard/          # AnimalPage, DailyLogForm, etc.
+│   │   ├── ai/                 # AiChatAssistant, AiContentGenerator
+│   │   ├── items/              # ItemCard
+│   │   └── layout/             # Sidebar
+│   ├── context/                # AuthContext, AnimalTypeContext
+│   ├── services/               # API service (axios)
+│   └── lib/                    # Providers (Google OAuth)
+├── public/
+│   └── animals/                # SVG icons (cow, goat, hen, duck)
+└── .env.local
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## API
+
+All API requests go to `NEXT_PUBLIC_API_URL` (default: `http://localhost:5000/api`).
+
+## Deployment
+
+- **Vercel** — Auto-deploy from GitHub
+- Set environment variables in Vercel dashboard
+
+## License
+
+Private — SmartKhamar AI
