@@ -10,22 +10,14 @@ interface Message {
 
 export default function AiChatAssistant() {
   const [isOpen, setIsOpen] = useState(false);
-<<<<<<< HEAD
-  const [messages, setMessages] = useState<Message[]>([
-    { role: "assistant", text: "Hello! I'm SmartKhamar AI. Ask me anything about cow farming, health, breeding, or farm management!" },
-  ]);
-=======
   const [isConnected, setIsConnected] = useState<boolean | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
->>>>>>> 8cfe7ef (Initial commit)
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => { bottomRef.current?.scrollIntoView({ behavior: "smooth" }); }, [messages]);
 
-<<<<<<< HEAD
-=======
   useEffect(() => {
     if (isOpen && messages.length === 0) {
       checkConnection();
@@ -49,7 +41,6 @@ export default function AiChatAssistant() {
     }
   }
 
->>>>>>> 8cfe7ef (Initial commit)
   async function handleSend(e?: React.FormEvent) {
     e?.preventDefault();
     if (!input.trim() || isLoading) return;
@@ -62,11 +53,7 @@ export default function AiChatAssistant() {
       const { data } = await api.post("/ai/chat", { message: userMsg, history });
       setMessages((prev) => [...prev, { role: "assistant", text: data.reply }]);
     } catch {
-<<<<<<< HEAD
-      setMessages((prev) => [...prev, { role: "assistant", text: "Sorry, I encountered an error. Please try again." }]);
-=======
       setMessages((prev) => [...prev, { role: "assistant", text: "AI service এখন offline আছে। পরে আবার চেষ্টা করুন।" }]);
->>>>>>> 8cfe7ef (Initial commit)
     } finally {
       setIsLoading(false);
     }
