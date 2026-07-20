@@ -97,15 +97,7 @@ export default function AiChatAssistant() {
             {isLoading && (
               <div className="flex justify-start">
                 <div className="rounded-2xl bg-zinc-100 px-4 py-2.5 text-sm text-zinc-500">
-<<<<<<< HEAD
-                  <span className="inline-flex gap-1">
-                    <span className="h-2 w-2 animate-bounce rounded-full bg-zinc-400" style={{ animationDelay: "0ms" }} />
-                    <span className="h-2 w-2 animate-bounce rounded-full bg-zinc-400" style={{ animationDelay: "150ms" }} />
-                    <span className="h-2 w-2 animate-bounce rounded-full bg-zinc-400" style={{ animationDelay: "300ms" }} />
-                  </span>
-=======
                   Thinking...
->>>>>>> 8cfe7ef (Initial commit)
                 </div>
               </div>
             )}
@@ -113,11 +105,7 @@ export default function AiChatAssistant() {
           </div>
           <form onSubmit={handleSend} className="flex items-center gap-2 border-t border-zinc-200 p-3">
             <input
-<<<<<<< HEAD
-              type="text" value={input} onChange={(e) => setInput(e.target.value)} placeholder="Ask about cow farming..."
-=======
               type="text" value={input} onChange={(e) => setInput(e.target.value)} placeholder="Ask about farming..."
->>>>>>> 8cfe7ef (Initial commit)
               className="flex-1 rounded-xl border border-zinc-300 bg-zinc-50 px-3 py-2 text-sm text-zinc-900 placeholder-zinc-400 focus:border-emerald-500 focus:outline-none"
               disabled={isLoading}
             />
