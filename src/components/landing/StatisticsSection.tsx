@@ -2,7 +2,7 @@
 
 const STATS = [
   { value: "500+", label: "Farms Using SmartKhamar" },
-  { value: "12K+", label: "Cows Tracked" },
+  { value: "12K+", label: "Animals Tracked" },
   { value: "98%", label: "Vaccination Compliance" },
   { value: "\u09F32.4M", label: "Farmer Profit Increased" },
 ];

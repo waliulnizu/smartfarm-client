@@ -1,28 +1,59 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { useSearchParams } from "next/navigation";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import ItemCard from "@/components/items/ItemCard";
 import { SkeletonBlock } from "@/components/dashboard/Skeleton";
 import api from "@/services/api";
 
-const FILTERS = ["all", "Milch Cow", "Ox", "Heifer", "Calf"];
+const ANIMAL_TYPES = [
+  { value: "Cow", label: "Cow", emoji: "\uD83D\uDC04" },
+  { value: "Goat", label: "Goat", emoji: "\uD83D\uDC10" },
+  { value: "Hen", label: "Hen", emoji: "\uD83D\uDC14" },
+  { value: "Duck", label: "Duck", emoji: "\uD83E\uDD86" },
+];
+
+const SUBTYPE_MAP: Record<string, string[]> = {
+  Cow: ["Milch Cow", "Ox", "Heifer", "Calf"],
+  Goat: ["Buck", "Doe", "Kid"],
+  Hen: ["Layer", "Broiler", "Cock", "Deshi Hen"],
+  Duck: ["Pekin", "Indian Runner", "Muscovy", "Khaki Campbell"],
+};
+
+const TITLE_MAP: Record<string, string> = {
+  Cow: "Browse Cows",
+  Goat: "Browse Goats",
+  Hen: "Browse Hens",
+  Duck: "Browse Ducks",
+};
+
+const DESC_MAP: Record<string, string> = {
+  Cow: "Explore registered cattle from farms across Bangladesh",
+  Goat: "Explore registered goats from farms across Bangladesh",
+  Hen: "Explore registered poultry from farms across Bangladesh",
+  Duck: "Explore registered ducks from farms across Bangladesh",
+};
 
 export default function ExplorePage() {
+  const searchParams = useSearchParams();
+  const initialType = searchParams.get("type") || "Cow";
+
   const [animals, setAnimals] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [search, setSearch] = useState("");
+  const [type, setType] = useState(initialType);
   const [subType, setSubType] = useState("all");
   const [gender, setGender] = useState("all");
   const [sort, setSort] = useState("newest");
+  const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
-  async function fetchData() {
+  const fetchData = useCallback(async () => {
     setIsLoading(true);
     try {
-      const params: any = { page, limit: "12", sort };
+      const params: any = { type, page, limit: "12", sort };
       if (search) params.search = search;
       if (subType !== "all") params.subType = subType;
       if (gender !== "all") params.gender = gender;
@@ -34,9 +65,16 @@ export default function ExplorePage() {
     } finally {
       setIsLoading(false);
     }
-  }
+  }, [type, subType, gender, sort, search, page]);
 
-  useEffect(() => { fetchData(); }, [page, subType, gender, sort]);
+  useEffect(() => { fetchData(); }, [fetchData]);
+
+  const handleTypeChange = (newType: string) => {
+    setType(newType);
+    setSubType("all");
+    setGender("all");
+    setPage(1);
+  };
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -44,14 +82,26 @@ export default function ExplorePage() {
     fetchData();
   };
 
+  const subTypes = SUBTYPE_MAP[type] || [];
+
   return (
     <div className="min-h-screen bg-zinc-50">
       <Navbar />
       <div className="pt-20">
         <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
           <div className="mb-8">
-            <h1 className="text-3xl font-bold text-zinc-900">Browse Cows</h1>
-            <p className="mt-1 text-zinc-500">Explore registered cattle from farms across Bangladesh</p>
+            <h1 className="text-3xl font-bold text-zinc-900">{TITLE_MAP[type] || "Browse Animals"}</h1>
+            <p className="mt-1 text-zinc-500">{DESC_MAP[type]}</p>
+          </div>
+
+          <div className="mb-6 flex flex-wrap gap-2">
+            {ANIMAL_TYPES.map((t) => (
+              <button key={t.value} onClick={() => handleTypeChange(t.value)}
+                className={`flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-medium transition ${type === t.value ? "bg-emerald-600 text-white shadow-md" : "border border-zinc-200 bg-white text-zinc-600 hover:bg-zinc-50"}`}>
+                <span className="text-lg">{t.emoji}</span>
+                {t.label}
+              </button>
+            ))}
           </div>
 
           <div className="mb-6 flex flex-wrap items-center gap-3">
@@ -66,10 +116,13 @@ export default function ExplorePage() {
           </div>
 
           <div className="mb-6 flex flex-wrap items-center gap-3">
-            <div className="flex gap-1 rounded-xl border border-zinc-200 bg-white p-1">
-              {FILTERS.map((f) => (
-                <button key={f} onClick={() => { setSubType(f); setPage(1); }} className={`rounded-lg px-3 py-1.5 text-xs font-medium transition ${subType === f ? "bg-emerald-100 text-emerald-800" : "text-zinc-500 hover:text-zinc-700"}`}>
-                  {f === "all" ? "All" : f}
+            <div className="flex flex-wrap gap-1 rounded-xl border border-zinc-200 bg-white p-1">
+              <button onClick={() => { setSubType("all"); setPage(1); }} className={`rounded-lg px-3 py-1.5 text-xs font-medium transition ${subType === "all" ? "bg-emerald-100 text-emerald-800" : "text-zinc-500 hover:text-zinc-700"}`}>
+                All
+              </button>
+              {subTypes.map((s) => (
+                <button key={s} onClick={() => { setSubType(s); setPage(1); }} className={`rounded-lg px-3 py-1.5 text-xs font-medium transition ${subType === s ? "bg-emerald-100 text-emerald-800" : "text-zinc-500 hover:text-zinc-700"}`}>
+                  {s}
                 </button>
               ))}
             </div>
@@ -86,7 +139,7 @@ export default function ExplorePage() {
               <option value="price_asc">Price: Low</option>
               <option value="price_desc">Price: High</option>
             </select>
-            <span className="text-xs text-zinc-400">{animals.length} of {totalPages > 0 ? "..." : "0"} results</span>
+            <span className="text-xs text-zinc-400">{animals.length} results</span>
           </div>
 
           {isLoading ? (
@@ -102,15 +155,16 @@ export default function ExplorePage() {
             </div>
           ) : animals.length === 0 ? (
             <div className="py-20 text-center">
-              <span className="text-6xl">\uD83D\uDC04</span>
-              <p className="mt-4 text-lg font-medium text-zinc-500">No cows found</p>
+              <span className="text-6xl">{"\uD83D\uDC3E"}</span>
+              <p className="mt-4 text-lg font-medium text-zinc-500">No {type.toLowerCase()}s found</p>
               <p className="text-sm text-zinc-400">Try adjusting your search or filters</p>
             </div>
           ) : (
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {animals.map((a: any) => (
-                <ItemCard key={a._id} cow={{
+                <ItemCard key={a._id} animal={{
                   _id: a._id,
+                  type: a.type,
                   identityNumber: a.identityNumberOrBatchName,
                   name: a.name,
                   breed: a.breed,

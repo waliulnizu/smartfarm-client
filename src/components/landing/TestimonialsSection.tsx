@@ -2,9 +2,9 @@
 
 const TESTIMONIALS = [
   { name: "Abdul Rahman", role: "Dairy Farmer, Rangpur", avatar: "\uD83D\uDC68\u200D\uD83C\uDF3E", quote: "SmartKhamar helped me track 25 cows effortlessly. The vaccine alerts alone saved me from losing two calves." },
-  { name: "Fatima Begum", role: "Farm Owner, Sylhet", avatar: "\uD83D\uDC69\u200D\uD83C\uDF3E", quote: "The ROI feature showed me which cows are profitable. I increased my monthly income by 40% in 3 months." },
-  { name: "Karim Uddin", role: "Veterinary Consultant", avatar: "\uD83D\uDC68\u200D\u2695\uFE0F", quote: "I recommend SmartKhamar to all my clients. The weight tracking and health logs are incredibly detailed." },
-  { name: "Shahida Parvin", role: "Co-operative Manager, Bogura", avatar: "\uD83D\uDC69\u200D\uD83D\uDCBC", quote: "Managing 100+ cows across 5 farms is now possible with a single dashboard. A game changer for cooperatives." },
+  { name: "Fatima Begum", role: "Farm Owner, Sylhet", avatar: "\uD83D\uDC69\u200D\uD83C\uDF3E", quote: "The ROI feature showed me which animals are profitable. I increased my monthly income by 40% in 3 months." },
+  { name: "Karim Uddin", role: "Livestock Consultant", avatar: "\uD83D\uDC68\u200D\u2695\uFE0F", quote: "I recommend SmartKhamar to all my clients. The weight tracking and health logs work for cows, goats, and poultry alike." },
+  { name: "Shahida Parvin", role: "Co-operative Manager, Bogura", avatar: "\uD83D\uDC69\u200D\uD83D\uDCBC", quote: "Managing 100+ animals across 5 farms is now possible with a single dashboard. A game changer for cooperatives." },
 ];
 
 export default function TestimonialsSection() {

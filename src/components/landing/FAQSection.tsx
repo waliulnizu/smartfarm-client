@@ -3,8 +3,8 @@
 import { useState } from "react";
 
 const FAQS = [
-  { q: "How do I add a new cow to the system?", a: "Go to Dashboard > Add Animal. Fill in the breed, weight, feed amount, and optionally gender, category, and pregnancy status. The system auto-generates a unique neck-tag ID." },
-  { q: "Can I track milk production per cow?", a: "Yes. Each daily log entry includes milk collected liters. The system aggregates this for per-cow milk production reports and ROI calculations." },
+  { q: "How do I add a new animal to the system?", a: "Go to Dashboard > Add Animal. Fill in the breed, weight, feed amount, and optionally gender, category, and pregnancy status. The system auto-generates a unique ID." },
+  { q: "What animal types are supported?", a: "SmartKhamar supports Cows, Goats, Hens, and Ducks. Each type has its own categories — for example Cows have Milch Cow, Ox, Heifer, Calf; Goats have Buck, Doe, Kid; Hens have Layer, Broiler, Cock; and Ducks have Pekin, Runner, Muscovy." },
   { q: "How do vaccine alerts work?", a: "When you log a vaccine via the Medical Log, you set a next dose date. The system sends alerts for overdue, tomorrow, and upcoming vaccines within a 2-day window." },
   { q: "Is my farm data secure?", a: "Absolutely. All data is encrypted in transit via HTTPS. Authentication uses JWT access + refresh tokens. Role-based access controls protect sensitive financial data." },
   { q: "Can multiple users manage the same farm?", a: "Yes. Admins can create Staff accounts. Staff can register animals and input daily logs, while only Admins can access valuation reports and user management." },
