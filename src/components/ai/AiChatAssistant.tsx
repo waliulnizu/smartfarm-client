@@ -80,12 +80,9 @@ export default function AiChatAssistant() {
             <div className="flex items-center gap-2">
               <span className="text-lg">{"\uD83E\uDD16"}</span>
               <span className="font-semibold text-white">SmartKhamar AI</span>
-<<<<<<< HEAD
-=======
               {isConnected !== null && (
                 <span className={`ml-1 h-2 w-2 rounded-full ${isConnected ? "bg-green-300" : "bg-red-300"}`} title={isConnected ? "Connected" : "Offline"} />
               )}
->>>>>>> 8cfe7ef (Initial commit)
             </div>
             <button onClick={() => setIsOpen(false)} className="text-white/80 hover:text-white">&times;</button>
           </div>
