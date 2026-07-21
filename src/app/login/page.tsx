@@ -5,9 +5,11 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { GoogleLogin, CredentialResponse } from "@react-oauth/google";
 import api from "@/services/api";
+import { useAuth } from "@/context/AuthContext";
 
 export default function LoginPage() {
   const router = useRouter();
+  const { refresh } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -20,6 +22,7 @@ export default function LoginPage() {
     try {
       const { data } = await api.post("/auth/login", { email, password });
       localStorage.setItem("accessToken", data.accessToken);
+      await refresh();
       router.push("/");
     } catch (err: unknown) {
       setError((err as { response?: { data?: { message?: string } } })?.response?.data?.message || "Login failed");
@@ -32,6 +35,7 @@ export default function LoginPage() {
     try {
       const { data } = await api.post("/auth/google", { credential: credentialResponse.credential });
       localStorage.setItem("accessToken", data.accessToken);
+      await refresh();
       router.push("/");
     } catch {
       setError("Google login failed. Try email login instead.");
